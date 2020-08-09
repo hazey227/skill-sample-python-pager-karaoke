@@ -1,11 +1,8 @@
 {
     "type": "APL",
     "version": "1.0",
+    "theme": "dark",
     "import": [
-        {
-            "name": "alexa-viewport-profiles",
-            "version": "1.0.0"
-        },
         {
             "name": "alexa-layouts",
             "version": "1.0.0"
@@ -13,83 +10,611 @@
     ],
     "resources": [
         {
-            "description": "Cheese colors",
-            "colors": {
-                "roundCheeseColor": "#556270",
-                "landscapeCheeseColor": "#ffffff"
+            "description": "All page resources",
+            "strings": {
+                "pagesBackground": "https://d2o906d8ln7ui1.cloudfront.net/images/BT7_Background.png",
+                "pagesLogo": "",
+                "pagesHint": ""
             }
         },
         {
-            "description": "Cheese font size",
+            "description": "Page1 resources",
+            "strings": {
+                "page1Title": "Mesquite Tree",
+                "page1Image": "https://mesquite.s3-us-west-2.amazonaws.com/MESQUITE-TREE-1.jpg"
+            }
+        },
+        {
+            "description": "Page2 resources",
+            "strings": {
+                "page2Title": "Open Pods",
+                "page2Image": "https://mesquite.s3-us-west-2.amazonaws.com/Trunk-2.jpg"
+            }
+        },
+        {
+            "description": "Page3 resources",
+            "strings": {
+                "page3Title": "Ground Pods",
+                "page3Image": "https://mesquite.s3-us-west-2.amazonaws.com/BRANCH-LEAFS-3.jpg"
+            }
+        },
+        {
+            "description": "Page4 resources",
+            "strings": {
+                "page4Title": "Branch Leaves",
+                "page4Image": "https://mesquite.s3-us-west-2.amazonaws.com/LEAVES-4.jpg"
+            }
+        },
+        {
+            "description": "Page5 resources",
+            "strings": {
+                "page5Title": "Sap",
+                "page5Image": "https://mesquite.s3-us-west-2.amazonaws.com/SAP-5.jpg"
+            }
+        },
+        {
+            "description": "Page6 resources",
+            "strings": {
+                "page6Title": "Tree",
+                "page6Image": "https://mesquite.s3-us-west-2.amazonaws.com/Pods-6.jpg"
+            }
+        },
+        {
+            "description": "Page7 resources",
+            "strings": {
+                "page7Title": "Ground Pods",
+                "page7Image": "https://mesquite.s3-us-west-2.amazonaws.com/Mesquite+(7).jpg"
+            }
+        },
+        {
+            "description": "Stock color for the light theme",
+            "colors": {
+                "colorTextPrimary": "#151920"
+            }
+        },
+        {
+            "description": "Stock color for the dark theme",
+            "when": "${viewport.theme == 'dark'}",
+            "colors": {
+                "colorTextPrimary": "#f0f1ef"
+            }
+        },
+        {
+            "description": "Standard font sizes",
             "dimensions": {
-                "headFontSize": "50px"
+                "textSizeBody": 48,
+                "textSizePrimary": 27,
+                "textSizeSecondary": 23,
+                "textSizeSecondaryHint": 25
+            }
+        },
+        {
+            "description": "Common spacing values",
+            "dimensions": {
+                "spacingThin": 6,
+                "spacingSmall": 12,
+                "spacingMedium": 24,
+                "spacingLarge": 48,
+                "spacingExtraLarge": 72
+            }
+        },
+        {
+            "description": "Common margins and padding",
+            "dimensions": {
+                "marginTop": 40,
+                "marginLeft": 60,
+                "marginRight": 60,
+                "marginBottom": 40
             }
         }
     ],
     "styles": {
-        "CheeseStyle": {
+        "textStyleBase": {
+            "description": "Base font description; set color and core font family",
             "values": [
                 {
-                    "fontSize": "@headFontSize",
-                    "color": "@roundCheeseColor",
-                    "textAlign": "center",
-                    "fontWeight": 300
+                    "color": "@colorTextPrimary",
+                    "fontFamily": "Amazon Ember"
                 }
             ]
         },
-        "CheeseStyleLarge": {
-            "extends": "CheeseStyle",
-            "values": [
-                {
-                    "fontSize": "@headFontSize",
-                    "color": "@landscapeCheeseColor",
-                    "paddingLeft": "30px",
-                    "paddingTop": "30px",
-                    "fontWeight": 100
-                }
+        "textStyleBase0": {
+            "description": "Thin version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "100"
+            }
+        },
+        "textStyleBase1": {
+            "description": "Light version of basic font",
+            "extend": "textStyleBase",
+            "values": {
+                "fontWeight": "300"
+            }
+        },
+        "mixinBody": {
+            "values": {
+                "fontSize": "@textSizeBody"
+            }
+        },
+        "mixinPrimary": {
+            "values": {
+                "fontSize": "@textSizePrimary"
+            }
+        },
+        "mixinSecondary": {
+            "values": {
+                "fontSize": "@textSizeSecondary"
+            }
+        },
+        "textStylePrimary": {
+            "extend": [
+                "textStyleBase1",
+                "mixinPrimary"
             ]
+        },
+        "textStyleSecondary": {
+            "extend": [
+                "textStyleBase0",
+                "mixinSecondary"
+            ]
+        },
+        "textStyleBody": {
+            "extend": [
+                "textStyleBase1",
+                "mixinBody"
+            ]
+        },
+        "textStyleSecondaryHint": {
+            "values": {
+                "fontFamily": "Bookerly",
+                "fontStyle": "italic",
+                "fontSize": "@textSizeSecondaryHint",
+                "color": "@colorTextPrimary"
+            }
         }
     },
     "layouts": {
-        "CheeseHeader": {
+        "Page1": {
             "parameters": [
                 {
-                    "name": "title",
+                    "name": "hint",
                     "type": "string"
                 }
             ],
             "items": [
                 {
-                    "when": "${@viewportProfile == @hubRoundSmall}",
+                    "when": "${viewport.shape == 'round'}",
                     "type": "Container",
                     "direction": "column",
-                    "alignItems": "center",
                     "width": "100vw",
-                    "height": "20vh",
+                    "height": "100vh",
                     "items": [
                         {
-                            "type": "Frame",
-                            "height": "95vh",
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
                             "width": "100vw",
-                            "borderWidth": "3px",
-                            "borderColor": "#C44D58",
-                            "borderRadius": "10px",
-                            "backgroundColor": "#FF6B6B",
+                            "height": "100vh",
+                            "position": "absolute",
+                            "scrim": true
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page1Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "paddingBottom": 200,
+                            "alignItems": "center",
+                            "justifyContent": "center",
                             "items": [
                                 {
-                                    "type": "Text",
-                                    "text": "${title}",
-                                    "style": "CheeseStyle",
-                                    "paddingTop": "5vh"
+                                    "type": "Image",
+                                    "source": "@page1Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "100vh",
+                                    "align": "center"
                                 }
                             ]
                         }
                     ]
                 },
                 {
-                    "type": "Text",
-                    "text": "${title}",
-                    "style": "CheeseStyleLarge"
+                    "type": "Container",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page1Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "direction": "row",
+                            "justifyContent": "center",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "width": "100vw",
+                                    "height": "75vh",
+                                    "source": "@page1Image",
+                                    "scale": "best-fit",
+                                    "align": "center"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "AlexaFooter"
+                }
+            ]
+        },
+        "Page2": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "when": "${viewport.shape == 'round'}",
+                    "type": "Container",
+                    "direction": "column",
+                    "paddingLeft": 50,
+                    "paddingRight": 30,
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "scale": "best-fill"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page2Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Text",
+                            "text": "",
+                            "size": "@textSizeBody",
+                            "style": "textStyleBody"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "position": "absolute",
+                            "width": "100vw",
+                            "height": "100vh",
+                            "scale": "best-fill"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerTitle": "@page2Title",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "height": "100vh",
+                            "width": "100vw",
+                            "paddingLeft": "@marginLeft",
+                            "paddingRight": "@marginRight",
+                            "paddingBottom": "@marginBottom",
+                           "items": [
+                                {
+                                    "type": "Image",
+                                    "width": "100vw",
+                                    "height": "60vh",
+                                    "source": "@page2Image",
+                                    "scale": "best-fit",
+                                    "align": "center"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "AlexaFooter"
+                }
+            ]
+        },
+        "Page3": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100%",
+                            "height": "100%",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "grow": 1,
+                            "justifyContent": "${viewport.shape == 'round' ? 'center' : 'end'}",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "@page3Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "75vh",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Page4": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100%",
+                            "height": "100%",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "grow": 1,
+                            "justifyContent": "${viewport.shape == 'round' ? 'center' : 'end'}",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "@page4Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "75vh",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Page5": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100%",
+                            "height": "100%",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "grow": 1,
+                            "justifyContent": "${viewport.shape == 'round' ? 'center' : 'end'}",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "@page5Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "75vh",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Page6": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100%",
+                            "height": "100%",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "grow": 1,
+                            "justifyContent": "${viewport.shape == 'round' ? 'center' : 'end'}",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "@page6Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "75vh",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter"
+                        }
+                    ]
+                }
+            ]
+        },
+        "Page7": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Container",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "source": "@pagesBackground",
+                            "scale": "best-fill",
+                            "width": "100%",
+                            "height": "100%",
+                            "position": "absolute"
+                        },
+                        {
+                            "type": "AlexaHeader",
+                            "headerAttributionImage": "@pagesLogo"
+                        },
+                        {
+                            "type": "Container",
+                            "grow": 1,
+                            "justifyContent": "${viewport.shape == 'round' ? 'center' : 'end'}",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "source": "@page7Image",
+                                    "scale": "best-fit",
+                                    "width": "100vw",
+                                    "height": "75vh",
+                                    "align": "center"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "AlexaFooter"
+                        }
+                    ]
+                }
+            ]
+        },
+        "MyPager": {
+            "parameters": [
+                {
+                    "name": "hint",
+                    "type": "string"
+                }
+            ],
+            "items": [
+                {
+                    "type": "Pager",
+                    "id": "pagerComponentId",
+                    "width": "100vw",
+                    "height": "100vh",
+                    "items": [
+                        {
+                            "type": "Page1",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page2",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page3",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page4",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page5",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page6",
+                            "hint": "${hint}"
+                        },
+                        {
+                            "type": "Page7",
+                            "hint": "${hint}"
+                        }
+                    ]
                 }
             ]
         }
@@ -98,87 +623,10 @@
         "parameters": [
             "payload"
         ],
-        "item": [
+        "items": [
             {
-                "when": "${@viewportProfile == @hubRoundSmall}",
-                "type": "Container",
-                "direction": "column",
-                "width": "100vw",
-                "height": "100vh",
-                "items": [
-                    {
-                        "type": "Image",
-                        "source": "https://d2o906d8ln7ui1.cloudfront.net/images/BT6_Background.png",
-                        "position": "absolute",
-                        "width": "100vw",
-                        "height": "100vh",
-                        "scale": "best-fill"
-                    },
-                    {
-                        "type": "CheeseHeader",
-                        "title": "Hello, World!"
-                    },
-                    {
-                        "type": "ScrollView",
-                        "item": [
-                            {
-                                "type": "Text",
-                                "id": "karaokecomponent",
-                                "text": "${payload.karaokeTemplateData.properties.karaokeText}",
-                                "speech": "${payload.karaokeTemplateData.properties.karaokeSpeech}",
-                                "fontSize": "55px",
-                                "color": "#ffffff",
-                                "width": "90vw",
-                                "paddingTop": "30px",
-                                "paddingLeft": "30px",
-                                "paddingRight": "30px",
-                                "fontWeight": 300
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "type": "Container",
-                "direction": "column",
-                "width": "100vw",
-                "height": "100vh",
-                "items": [
-                    {
-                        "type": "Image",
-                        "source": "https://d2o906d8ln7ui1.cloudfront.net/images/BT6_Background.png",
-                        "position": "absolute",
-                        "width": "100vw",
-                        "height": "100vh",
-                        "scale": "best-fill"
-                    },
-                    {
-                        "type": "CheeseHeader",
-                        "title": "Hello, World!"
-                    },
-                    {
-                        "type": "ScrollView",
-                        "width": "100vw",
-                        "height": "100vh",
-                        "items": [
-                            {
-                                "type": "Text",
-                                "id": "karaokespeechtext",
-                                "text": "${payload.karaokeTemplateData.properties.karaokeText}",
-                                "speech": "${payload.karaokeTemplateData.properties.karaokeSpeech}",
-                                "fontSize": "55px",
-                                "color": "#ffffff",
-                                "paddingLeft": "30px",
-                                "paddingTop": "30px",
-                                "fontWeight": 300
-                            }
-                        ]
-                    },
-                    {
-                        "type": "AlexaFooter",
-                        "footerHint": "${payload.karaokeTemplateData.properties.hintString}"
-                    }
-                ]
+                "type": "MyPager",
+                "hint": "${payload.pagerTemplateData.properties.hintString}"
             }
         ]
     }
