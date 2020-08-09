@@ -18,11 +18,11 @@ from ask_sdk_model.interfaces.alexa.presentation.apl import (
 
 from typing import Dict, Any
 
-SKILL_NAME = "Pager Karaoke"
-HELP_MESSAGE = ("You can say, show me pager, show me karaoke, "
+SKILL_NAME = "Mesquite Tree"
+HELP_MESSAGE = ("You can say, show me mesquite, speak spanish, "
                 "or show me device information!")
-HELP_REPROMPT = ("You can say, show me pager, show me karaoke, "
-                 "or show me device information!")
+HELP_REPROMPT = ("You can say, show me mesquite, speak spanish, "
+                "or show me device information!")
 STOP_MESSAGE = "Goodbye!"
 
 sb = SkillBuilder()
@@ -47,9 +47,9 @@ class LaunchRequestHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         logger.info("In LaunchRequest")
 
-        speech = ('Welcome to the Pager Karaoke Device skill! '
-                  'You can say, show me pager, show me karaoke, or '
-                  'show me device information!')
+        speech = ('Lios em chaniavu Cocorit museo yoeme,  '
+                  'Bienvenido al Cocorit museo de los yaquis, '
+                  'Welcome to Cocorit Museum of the Yaquis')
 
         handler_input.response_builder.speak(speech).ask(speech).set_card(
             SimpleCard(SKILL_NAME, speech))
@@ -67,7 +67,7 @@ class PagerIntentHandler(AbstractRequestHandler):
         # type: (HandlerInput) -> Response
         logger.info("In PagerIntent")
 
-        speech = 'This is the pager template!'
+        speech = ('Welcome to Cocorit Museum of the Yaquis')
 
         handler_input.response_builder.speak(speech).add_directive(
             RenderDocumentDirective(
@@ -77,7 +77,7 @@ class PagerIntentHandler(AbstractRequestHandler):
                     'pagerTemplateData': {
                         'type': 'object',
                         'properties': {
-                            'hintString': 'try the blue cheese!'
+                            'hintString': 'mesquite tree'
                         },
                         'transformers': [
                             {
@@ -95,63 +95,6 @@ class PagerIntentHandler(AbstractRequestHandler):
                     AutoPageCommand(
                         component_id="pagerComponentId",
                         duration=5000)
-                ]
-            )
-        )
-
-        return handler_input.response_builder.response
-
-
-class KaraokeIntentHandler(AbstractRequestHandler):
-    """Handler for Karaoke Intent."""
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return is_intent_name("KaraokeIntent")(handler_input)
-
-    def handle(self, handler_input):
-        # type: (HandlerInput) -> Response
-        logger.info("In Karaoke Intent")
-
-        speech = 'This is the karaoke template!'
-
-        handler_input.response_builder.speak(speech).add_directive(
-            RenderDocumentDirective(
-                token="karaokeToken",
-                document=_load_apl_document("karaoke.json"),
-                datasources={
-                    'karaokeTemplateData': {
-                        'type': 'object',
-                        'objectId': 'karaokeSample',
-                        'properties': {
-                            'karaokeSsml': '<speak>We’re excited to announce a new video training series from A Cloud Guru on Alexa skill development. The free training series called Alexa Devs walks new developers and non-developers through how to build Alexa skills from start to finish. You’ll also learn how to enhance your skill using persistence, Speechcons, and SSML to create more engaging voice experiences for customers. Check out the first episode on how to build your first Alexa skill here.</speak>',
-                            'hintString': 'try the blue cheese!'
-                        },
-                        'transformers': [
-                            {
-                                'inputPath': 'karaokeSsml',
-                                'outputName': 'karaokeSpeech',
-                                'transformer': 'ssmlToSpeech'
-                            },
-                            {
-                                'inputPath': 'karaokeSsml',
-                                'outputName': 'karaokeText',
-                                'transformer': 'ssmlToText'
-                            },
-                            {
-                                'inputPath': 'hintString',
-                                'transformer': 'textToHint'
-                            }
-                        ]
-                    }
-                }
-            )
-        ).add_directive(
-            ExecuteCommandsDirective(
-                token="karaokeToken",
-                commands=[
-                    SpeakItemCommand(
-                        component_id="karaokespeechtext",
-                        highlight_mode=HighlightMode.LINE)
                 ]
             )
         )
@@ -297,7 +240,7 @@ class ResponseLogger(AbstractResponseInterceptor):
 # Register intent handlers
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(PagerIntentHandler())
-sb.add_request_handler(KaraokeIntentHandler())
+
 sb.add_request_handler(DeviceIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
