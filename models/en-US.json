@@ -25,15 +25,6 @@
                     ]
                 },
                 {
-                    "name": "KaraokeIntent",
-                    "slots": [],
-                    "samples": [
-                        "karaoke",
-                        "show me karaoke",
-                        "show me karaoke template"
-                    ]
-                },
-                {
                     "name": "DeviceIntent",
                     "slots": [],
                     "samples": [
