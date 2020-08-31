@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "mesquite tree pictures",
+            "invocationName": "say welcome message",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -16,73 +16,20 @@
                     "samples": []
                 },
                 {
-                    "name": "PagerIntent",
+                    "name": "HelloWorldIntent",
                     "slots": [],
                     "samples": [
-                        "slideshow",
-                        "tree",
-                        "mesquite",
                         "hello",
-                        "present",
-                        "pager",
-                        "show me pager",
-                        "show me pager template"
+                        "how are you",
+                        "say hi world",
+                        "say hi",
+                        "hi",
+                        "say hello world",
+                        "say hello"
                     ]
-                },
-                {
-                    "name": "DeviceIntent",
-                    "slots": [],
-                    "samples": [
-                        "device",
-                        "devices",
-                        "show me device",
-                        "show me device template",
-                        "show me devices",
-                        "show me devices template"
-                    ]
-                },
-                {
-                    "name": "AMAZON.MoreIntent",
-                    "samples": []
                 },
                 {
                     "name": "AMAZON.NavigateHomeIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.NavigateSettingsIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.NextIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PageUpIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PageDownIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.PreviousIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.ScrollRightIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.ScrollDownIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.ScrollLeftIntent",
-                    "samples": []
-                },
-                {
-                    "name": "AMAZON.ScrollUpIntent",
                     "samples": []
                 }
             ],
